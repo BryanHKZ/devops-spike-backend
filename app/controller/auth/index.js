@@ -65,7 +65,7 @@ exports.registerUser = async (req, res) => {
       payload,
       process.env.JWT_SECRET_KEY,
       {
-        expiresIn: 3600,
+        expiresIn: 19200,
       },
       async (error, token) => {
         if (error) throw error;
