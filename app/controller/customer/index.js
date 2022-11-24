@@ -6,6 +6,10 @@ module.exports = {
   createCustomer: async (req, res) => {
     try {
       const customer = await customerServices.newCustomer(req.body);
+
+      if (customer.code === 400) {
+        return res.status(customer.code).json({ message: customer.message });
+      }
       return res.status(201).json(customer);
     } catch (error) {
       console.log(error);

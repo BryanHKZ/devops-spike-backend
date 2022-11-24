@@ -3,6 +3,19 @@ const bcryptjs = require("bcryptjs");
 
 class CustomerRepository {
   async newCustomer(data) {
+    const emailRegistered = await Customer.find({ email: data.email });
+
+    if (emailRegistered[0])
+      return { code: 400, message: "Este email ya se encuentra registrado" };
+
+    const usernameTaked = await Customer.find({ username: data.username });
+
+    if (usernameTaked[0])
+      return {
+        code: 400,
+        message: "Este nombre de usuario ya se encuentra registrado",
+      };
+
     data.password = await bcryptjs.hash(data.password, 10);
 
     const customer = new Customer(data);

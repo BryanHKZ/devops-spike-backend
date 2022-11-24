@@ -52,8 +52,6 @@ exports.usuarioAutenticado = async (req, res) => {
 
 exports.registerUser = async (req, res) => {
   try {
-    req.body.password = await bcryptjs.hash(req.body.password, 10);
-
     const emailRegistered = await Customer.find({ email: req.body.email });
 
     if (emailRegistered)
@@ -67,6 +65,8 @@ exports.registerUser = async (req, res) => {
       return res
         .status(400)
         .json({ message: "Este nombre de usuario ya se encuentra registrado" });
+
+    req.body.password = await bcryptjs.hash(req.body.password, 10);
 
     const newCustomer = new Customer(req.body);
 
