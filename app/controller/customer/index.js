@@ -10,7 +10,25 @@ module.exports = {
       if (customer.code === 400) {
         return res.status(customer.code).json({ message: customer.message });
       }
-      return res.status(201).json(customer);
+
+      const payload = {
+        customer: {
+          id: customer.id,
+        },
+      };
+
+      jwt.sign(
+        payload,
+        process.env.JWT_SECRET_KEY,
+        {
+          expiresIn: 19200,
+        },
+        async (error, token) => {
+          if (error) throw error;
+
+          res.json({ token, customer });
+        }
+      );
     } catch (error) {
       console.log(error);
       return res

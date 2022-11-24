@@ -7,7 +7,6 @@ const authControler = require("../../app/controller/auth");
 // api/auth
 
 router.post("/login", authControler.authUser);
-router.post("/register", authControler.registerUser);
 router.get("/auth", auth, authControler.usuarioAutenticado);
 
 module.exports = router;
