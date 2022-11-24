@@ -12,7 +12,7 @@ const {
 
 api.post("/product", auth, createProduct);
 api.get("/product/:id", auth, getProduct);
-api.get("/product", auth, getAllProducts);
+api.get("/product", getAllProducts);
 api.delete("/product/:id", auth, removeProduct);
 api.put("/product/:id", auth, updateProduct);
 
